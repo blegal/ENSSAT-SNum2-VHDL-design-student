@@ -1,5 +1,13 @@
 
 trace.vcd
+testbench.vcd
 work-obj08.cf
 .DS_Store
 *.rtf
+.vscode
+
+# Xilinx related files
+
+top_module.bit
+.Xil
+clockInfo.txt

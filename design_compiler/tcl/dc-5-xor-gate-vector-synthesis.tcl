@@ -15,13 +15,18 @@ echo "link_library:      $link_library"
 echo "target_library:    $target_library"
 echo "symbol_library:    $symbol_library"
 
-analyze -library WORK -format vhdl { ../1-xor-gate-comb/xor_gate_comb.vhd }
+analyze -library WORK -format vhdl { ../5-xor-gate-vector/xor_gate_vector.vhd }
 
+#
 #	COMPILATION NORMALE
+#
 
-#elaborate xor_gate_comb -architecture ARCH -library DEFAULT
-#compile -exact_map -area_effort med -power_effort med -auto_ungroup area
-#uplevel #0 { report_cell } > area_report_normal_alu.txt
-#uplevel #0 { report_timing -path full -delay max -nworst 1 -max_paths 1 -significant_digits 2 -sort_by group } > timing_report_normal_alu.txt
+elaborate xor_gate_vector -architecture ARCH
+compile -exact_map -area_effort med -power_effort med -auto_ungroup area
+uplevel #0 { report_cell }
+uplevel #0 { report_timing -path full -delay max -nworst 1 -max_paths 1 -significant_digits 2 -sort_by group }
 
+#
+#
+exit 
 #	COMPILATION ULTRA

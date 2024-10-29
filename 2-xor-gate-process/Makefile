@@ -3,7 +3,7 @@ TARGET = testbench
 %GHDL_SIM_FLAGS= --stop-time=100ns
 %GHDL_SIM_FLAGS=
 
-VHDL_SRC      = xor_gate_comb.vhd
+VHDL_SRC      = xor_gate_process.vhd
 TESTBENCH_SRC = $(TARGET).vhd
 WAVEFORMS     = $(TARGET).vcd
 GTKWAVE_CFG   = $(TARGET).gtkw
@@ -35,33 +35,24 @@ gtkwave: trace
 scansion: trace
 	/Applications/Scansion.app/Contents/MacOS/Scansion $(WAVEFORMS)
 
+clean:
+	@echo "Cleaning 2-xor-gate-process"
+	@rm -rf $(WAVEFORMS) work-obj08.cf
+
 #
 #
 #######################################################################################################################
 #
 #
-
-yosys-rtl:
-	yosys -m ghdl -p 'ghdl xor_gate_comb.vhd -e xor_gate_comb; proc; opt; techmap; opt; write_verilog synth.v; show -format pdf -viewer open'
-
-yosys-asic:
-	yosys -m ghdl -p 'ghdl xor_gate_comb.vhd -e xor_gate_comb; proc; opt; techmap; dfflibmap -liberty ../lib/NangateOpenCellLibrary_typical.lib; abc -liberty ../lib/NangateOpenCellLibrary_typical.lib; opt; clean; write_verilog synth.v; show -format pdf -viewer open'
-
-ice40:yosys-rtl
-	nextpnr-ice40 --package hx1k --pcf leds.pcf --asc leds.asc --json leds.json --gui
 
 dc-rtl:
-    $(shell cd ../design_compiler; design_vision -f ./tcl/dc-1-xor-gate-rtl.tcl)
+    $(shell cd ../design_compiler; design_vision -f ./tcl/dc-2-xor-gate-process.tcl)
 
 dc-synthesis:
-    $(shell cd ../design_compiler; design_vision -f ./tcl/dc-1-xor-gate-synthesis.tcl)
+    $(shell cd ../design_compiler; design_vision -f ./tcl/dc-2-xor-gate-process-synthesis.tcl)
 
 #
 #
 #######################################################################################################################
 #
 #
-
-clean:
-	@echo "Cleaning 1-xor-gate-comb project"
-	@rm -rf $(WAVEFORMS) work-obj08.cf
