@@ -58,6 +58,10 @@ begin
     B <= "0011";
     wait for 10 ns;
 
+    A <= "1110";
+    B <= "1000";
+    wait for 10 ns;
+
     A <= "1011";
     B <= "1101";
     wait for 10 ns;
@@ -68,6 +72,10 @@ begin
 
     A <= "0001";
     B <= "1000";
+    wait for 10 ns;
+
+    A <= "1100";
+    B <= "0100";
     wait for 10 ns;
 
     A <= "0111";
