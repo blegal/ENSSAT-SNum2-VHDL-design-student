@@ -10,7 +10,7 @@ end;
 
 architecture bench of testbench is
 
-  COMPONENT adder_4b IS
+  COMPONENT fonc_logique IS
   PORT (
     A : IN  std_logic_vector(3 downto 0);
     B : IN  std_logic_vector(3 downto 0);
@@ -43,9 +43,9 @@ architecture bench of testbench is
 
 begin
 
-  uut: adder_4b port map (  A => A,
-                            B => B,
-                            S => S );
+  uut: fonc_logique port map (  A => A,
+                                B => B,
+                                S => S );
 
   stimulus: process
   begin
@@ -54,33 +54,25 @@ begin
     B <= "0001";
     wait for 10 ns;
 
-    -- Output value validation & reporting
-    ASSERT S = "00001" SEVERITY ERROR;
-    REPORT "" & to_bstring(A) & " + " & to_bstring(B) & " = " & to_bstring(S);
-
-    A <= "0001";
-    B <= "0001";
-    wait for 10 ns;
-
-    -- Output value validation & reporting
-    ASSERT S = "00010" SEVERITY ERROR;
-    REPORT "" & to_bstring(A) & " + " & to_bstring(B) & " = " & to_bstring(S);
-
-    A <= "1001";
-    B <= "1001";
-    wait for 10 ns;
-
-    -- Output value validation & reporting
-    ASSERT S = "10010" SEVERITY ERROR;
-    REPORT "" & to_bstring(A) & " + " & to_bstring(B) & " = " & to_bstring(S);
-
-    A <= "1001";
+    A <= "1101";
     B <= "0011";
     wait for 10 ns;
 
-    -- Output value validation & reporting
-    ASSERT S = "01100" SEVERITY ERROR;
-    REPORT "" & to_bstring(A) & " + " & to_bstring(B) & " = " & to_bstring(S);
+    A <= "1011";
+    B <= "1101";
+    wait for 10 ns;
+
+    A <= "1111";
+    B <= "0011";
+    wait for 10 ns;
+
+    A <= "0001";
+    B <= "1000";
+    wait for 10 ns;
+
+    A <= "0111";
+    B <= "0111";
+    wait for 10 ns;
 
     REPORT "Simulation end...";
     wait;
