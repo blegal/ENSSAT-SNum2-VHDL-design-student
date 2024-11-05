@@ -14,13 +14,13 @@ architecture bench of testbench is
   PORT (
     A : IN  std_logic_vector(3 downto 0);
     B : IN  std_logic_vector(3 downto 0);
-    S : OUT std_logic_vector(4 downto 0)
+    S : OUT std_logic
     );
   END COMPONENT;
   
   signal A : std_logic_vector(3 downto 0);
   signal B : std_logic_vector(3 downto 0);
-  signal S : std_logic_vector(4 downto 0);
+  signal S : std_logic;
 
   function to_bstring(sl : std_logic) return string is
     variable sl_str_v : string(1 to 3);  -- std_logic image with quotes around
